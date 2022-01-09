@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Api RESTFul para Proyecto Final PLC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pablo-gonzalezr/AngularPersonal.git"
+  },
+  "author": "Pablo Gonzalez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pablo-gonzalezr/AngularPersonal/issues"
+  },
+  "homepage": "https://github.com/pablo-gonzalezr/AngularPersonal#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "connect-multiparty": "^2.2.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.5",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
