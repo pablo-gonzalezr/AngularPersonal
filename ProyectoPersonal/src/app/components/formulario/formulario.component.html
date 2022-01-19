@@ -1,0 +1,124 @@
+<app-slider [nombre]="'Formulario'" [size]="'small'"></app-slider>
+
+<div class="center">
+  <section id="content">
+    <h2 class="subheader">Formulario</h2>
+    <h3>
+      <a href="https://angular.io/guide/two-way-binding"
+        >Binding bidireccional</a
+      >
+      <p>Modifica una propiedad en la vista y en el modelo de datos</p>
+      <p *ngIf="user.nombre">Nombre: {{ user.nombre }}</p>
+      <p *ngIf="user.apellidos">Apellidos: {{ user.apellidos }}</p>
+      <p *ngIf="user.bio">Mensaje: {{ user.bio }}</p>
+      <p *ngIf="user.genero">Genero: {{ user.genero }}</p>
+    </h3>
+    <hr />
+    <form
+      novalidate
+      class="mid-form"
+      #userForm="ngForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input
+          type="text"
+          name="nombre"
+          #nombre="ngModel"
+          [(ngModel)]="user.nombre"
+          required
+          pattern="[a-zA-Z]+"
+        />
+        <small *ngIf="!nombre.valid && nombre.touched"
+          >El nombre no es válido</small
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="apellidos">Apellidos</label>
+        <input
+          type="text"
+          name="apellidos"
+          #apellidos="ngModel"
+          [(ngModel)]="user.apellidos"
+          required
+          pattern="{{ regexLetters }}"
+        />
+        <small *ngIf="!apellidos.valid && apellidos.touched"
+          >Los apellidos no son válido</small
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="bio">Mensaje</label>
+        <textarea
+          name="bio"
+          #bio="ngModel"
+          [(ngModel)]="user.bio"
+          required
+        ></textarea>
+        <small *ngIf="!bio.valid && bio.touched"
+          >La biografía no es válida</small
+        >
+      </div>
+
+      <div class="form-group radibuttons">
+        <input
+          type="radio"
+          name="genero"
+          value="hombre"
+          #genero="ngModel"
+          [(ngModel)]="user.genero"
+          required
+        />
+        Hombre
+        <input
+          type="radio"
+          name="genero"
+          value="mujer"
+          #genero="ngModel"
+          [(ngModel)]="user.genero"
+        />
+        Mujer
+        <input
+          type="radio"
+          name="genero"
+          value="otro"
+          #genero="ngModel"
+          [(ngModel)]="user.genero"
+        />
+        Otro
+        <small *ngIf="!genero.valid && genero.touched"
+          >El género no es válido</small
+        >
+      </div>
+
+      <div class="clearfix"></div>
+
+      <input
+        type="submit"
+        value="Enviar"
+        class="btn btn-success"
+        [disabled]="userForm.invalid"
+      />
+    </form>
+    <h2 class="subheader">Eventos</h2>
+    <button (click)="hasDadoClick()">Evento click</button>
+    <input
+      type="text"
+      placeholder="Evento Blur"
+      [(ngModel)]="campo"
+      (blur)="hasSalido()"
+    />
+    {{ campo }}
+    <input
+      type="text"
+      placeholder="Evento press enter"
+      (keyup.enter)="presionaEnter()"
+      [(ngModel)]="enter"
+    />
+    {{ enter }}
+  </section>
+  <app-sidebar></app-sidebar>
+</div>

@@ -1,0 +1,11 @@
+<div class="center">
+  <section id="content">
+    <h2 class="subheader" *ngIf="articles.length >= 1">
+      Articulos encontrados
+    </h2>
+    <h2 class="subheader" *ngIf="articles.length == 0">No hay articulos</h2>
+    <h3>Buscado: {{ search }}</h3>
+    <app-articles [articles]="articles"></app-articles>
+  </section>
+  <app-sidebar></app-sidebar>
+</div>

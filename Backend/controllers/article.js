@@ -11,7 +11,6 @@ const path = require("path");
 const controller = {
   // Ruta de prueba
   datosCurso: (req, res) => {
-    console.log("Hola mundo");
     return res.status(200).send({
       curso: "PLC del master TWCAM",
       alumno: "Pablo González",
@@ -47,7 +46,12 @@ const controller = {
       // Asignar valores
       article.title = params.title;
       article.content = params.content;
-      article.image = null;
+
+      if (article.image) {
+        article.image = params.image;
+      } else {
+        article.image = params.image;
+      }
 
       // Guardar articulo
       article.save((err, articleStored) => {
@@ -238,24 +242,31 @@ const controller = {
       // obtenemos el id del articulo que viene por URL
       var articleId = req.params.id;
 
-      // Si todo es valido, buscar el articulo, asignarle el nombre de la impagen y actualizarlo
-      Article.findOneAndUpdate(
-        { _id: articleId },
-        { image: file_name },
-        { new: true },
-        (err, articleUpdated) => {
-          if (err || !articleUpdated) {
-            return res.status(500).send({
-              status: "error",
-              message: "Error al guardar la imágen de articulo",
+      if (articleId) {
+        Article.findOneAndUpdate(
+          { _id: articleId },
+          { image: file_name },
+          { new: true },
+          (err, articleUpdated) => {
+            if (err || !articleUpdated) {
+              return res.status(500).send({
+                status: "error",
+                message: "Error al guardar la imágen de articulo",
+              });
+            }
+            return res.status(200).send({
+              status: "success",
+              article: articleUpdated,
             });
           }
-          return res.status(200).send({
-            status: "success",
-            article: articleUpdated,
-          });
-        }
-      );
+        );
+      } else {
+        return res.status(200).send({
+          status: "success",
+          aimage: file_name,
+        });
+      }
+      // Si todo es valido, buscar el articulo, asignarle el nombre de la impagen y actualizarlo
     }
   }, // end upload
   getImage: (req, res) => {
